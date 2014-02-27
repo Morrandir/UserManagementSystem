@@ -3,15 +3,39 @@ package com.qubo.learning.common.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+public class SysPreviledges {
 
+
+    private int previledgeID;
+    private String previledgeName;
+    private Set<SysUserRole> userRoles = new HashSet<SysUserRole>();
+
+    public int getPreviledgeID() {
+        return previledgeID;
+    }
+
+    public void setPreviledgeID(int previledgeID) {
+        this.previledgeID = previledgeID;
+    }
+
+    public String getPreviledgeName() {
+        return previledgeName;
+    }
+
+    public void setPreviledgeName(String previledgeName) {
+        this.previledgeName = previledgeName;
+    }
+
+}
+
+
+
+
+
+/*
 @Entity
 @Table(name = "SYS_PREVILEDGES")
+
 public class SysPreviledges {
 	@Id
 	@GeneratedValue
@@ -41,3 +65,4 @@ public class SysPreviledges {
 	}
 
 }
+*/

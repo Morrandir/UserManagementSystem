@@ -1,4 +1,4 @@
-package com.qubo.learning;
+package com.qubo.learning.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

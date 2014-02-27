@@ -1,4 +1,4 @@
-package com.qubo.learning;
+package com.qubo.learning.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

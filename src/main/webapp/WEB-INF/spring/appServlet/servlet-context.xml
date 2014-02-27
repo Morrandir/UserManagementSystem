@@ -27,21 +27,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-    <context:component-scan base-package="com.qubo.learning"/>
+    <context:component-scan base-package="com.qubo.learning.controller" />
 
 
-
-    <beans:bean id="sessionFactory"
-                class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <beans:property name="dataSource" ref="dataSource" />
-        <beans:property name="packagesToScan"
-                        value="com.qubo.learning.common.model" />
-        <beans:property name="hibernateProperties">
-            <beans:props>
-                <beans:prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</beans:prop>
-                <beans:prop key="hibernate.show_sql">true</beans:prop>
-            </beans:props>
-        </beans:property>
-    </beans:bean>
 
 </beans:beans>

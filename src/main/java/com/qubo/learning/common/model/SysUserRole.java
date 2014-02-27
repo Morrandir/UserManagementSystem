@@ -1,19 +1,42 @@
 package com.qubo.learning.common.model;
 
-import java.util.HashSet;
-import java.util.Set;
+public class SysUserRole {
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+    private int role_id;
+    private int user_id;
+    private String role_name;
+
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getRole_name() {
+        return role_name;
+    }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
+    }
+
+}
+
+
+
+
+/*
 @Entity
 @Table(name="SYS_ROLE")
 public class SysUserRole {
@@ -51,3 +74,4 @@ public class SysUserRole {
 	}
 
 }
+*/
