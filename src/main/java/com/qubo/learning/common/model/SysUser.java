@@ -2,41 +2,41 @@ package com.qubo.learning.common.model;
 
 
 public class SysUser {
-    private int userID;
-    private String userName;
-    private String userPwd;
-    private boolean userEnabled;
+    private int user_id;
+    private String user_name;
+    private String password;
+    private boolean enabled;
 
-    public int getUserID() {
-        return userID;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public boolean isUserEnabled() {
-        return userEnabled;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setUserEnabled(boolean userEnabled) {
-        this.userEnabled = userEnabled;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 }
