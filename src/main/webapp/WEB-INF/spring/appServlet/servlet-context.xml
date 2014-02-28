@@ -27,7 +27,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-    <context:component-scan base-package="com.qubo.learning.controller" />
+    <context:component-scan base-package="com.qubo.learning.rest.controller" />
 
 
 

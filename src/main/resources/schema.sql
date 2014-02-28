@@ -3,6 +3,7 @@ create table SYS_USER (
 	user_name varchar(64) not null,
 	password varchar(256) not null,
 	enabled boolean not null,
+  online boolean not null,
 	primary key (user_id)
 );
 
@@ -33,8 +34,8 @@ insert into SYS_PREVILEDGES (previledge_id, previledge_name) values (2, 'PREVILE
 insert into ROLE_PREVILEDGES (role_id, previledge_id) values (1, 1);
 insert into ROLE_PREVILEDGES (role_id, previledge_id) values (2, 2);
 
-insert into SYS_USER (user_id, user_name, password, enabled) values (1, 'Admin', 'test', true);
-insert into SYS_USER (user_id, user_name, password, enabled) values (2, 'tester', 'test', true);
+insert into SYS_USER (user_id, user_name, password, enabled, online) values (1, 'Admin', 'test', true, false);
+insert into SYS_USER (user_id, user_name, password, enabled, online) values (2, 'tester', 'test', true, false);
 
 insert into SYS_USER_ROLE (role_id, user_id, role_name) values (1, 1, 'ROLE_ADMIN');
 insert into SYS_USER_ROLE (role_id, user_id, role_name) values (2, 1, 'ROLE_VIEWER');

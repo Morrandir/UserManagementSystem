@@ -6,6 +6,7 @@ public class SysUser {
     private String user_name;
     private String password;
     private boolean enabled;
+    private boolean online;
 
     public int getUser_id() {
         return user_id;
@@ -39,6 +40,13 @@ public class SysUser {
         this.enabled = enabled;
     }
 
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
 }
 
 

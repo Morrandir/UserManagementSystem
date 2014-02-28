@@ -12,9 +12,12 @@ import java.util.List;
 public interface SysUserMapper {
 
     @Select("select * from sys_user where user_name=#{username}")
-    public SysUser getUserByName(String username);
+    public SysUser getUserByName(@Param("username")String username);
 
     @Select("select * from sys_user")
     public List<SysUser> getAllUsers();
+
+    @Update("update sys_user set online = #{online} where user_name = #{username}")
+    public void setUserOnlineByName(@Param("username")String username, @Param("online")boolean online);
 
 }

@@ -16,4 +16,6 @@ public interface UserDao {
 
     public List<SysUser> getAllUsers();
 
+    public void setCurrentUserOnline();
+
 }

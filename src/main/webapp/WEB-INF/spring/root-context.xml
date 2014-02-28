@@ -13,7 +13,9 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-    <context:component-scan base-package="com.qubo.learning.common.service" />
+    <context:component-scan base-package="com.qubo.learning.common">
+        <!--<context:exclude-filter type="regex" expression="rest\.controller" />-->
+    </context:component-scan>
 
     <jdbc:embedded-database id="dataSource">
         <jdbc:script location="classpath:schema.sql" />
@@ -25,9 +27,7 @@
         <beans:property name="configLocation" value="classpath:mybatis-config.xml" />
     </beans:bean>
 
-    <beans:bean id="userDao" class="com.qubo.learning.common.service.UserDaoImpl" />
-
-    <beans:bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+     <beans:bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <beans:property name="mapperInterface" value="com.qubo.learning.common.mapper.SysUserMapper" />
         <beans:property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </beans:bean>

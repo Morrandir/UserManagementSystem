@@ -6,8 +6,10 @@ import com.qubo.learning.common.model.SysUser;
 import com.qubo.learning.common.model.SysUserRole;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * Created by Qubo_Song on 2/27/14.
  */
-@Repository
+@Repository("userDao")
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDetailsService {
 
     @Autowired
@@ -48,6 +50,14 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     @Override
     public List<SysUser> getAllUsers() {
         return userMapper.getAllUsers();
+    }
+
+    @Override
+    public void setCurrentUserOnline() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        userMapper.setUserOnlineByName(username, true);
     }
 
     @Override

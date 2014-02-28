@@ -12,10 +12,10 @@
 	Hello world!  
 </h1>
 
-<a href = "<c:url value="/user/overall" />">View all users</a>
-
 <P>  The time on the server is ${serverTime}. </P>
-<a href = "<c:url value="/j_spring_security_logout" />">Logout</a>
+
+<P><a href = "<c:url value="/user/overall" />">View all users</a></P>
+<P><a href = "<c:url value="/j_spring_security_logout" />">Logout</a></P>
 
 </body>
 </html>
