@@ -15,8 +15,12 @@
 <h3>${message}</h3>
 <form action='/j_spring_security_check' method='POST'>
     <table>
-        <tr><td>User name:</td><td><input type='text' name='j_username' value=''></td></tr>
-        <tr><td>Password:</td><td><input type='password' name='j_password'/></td></tr>
+        <tr><td>User name:</td><td><label>
+            <input type='text' name='j_username' value=''>
+        </label></td></tr>
+        <tr><td>Password:</td><td><label>
+            <input type='password' name='j_password'/>
+        </label></td></tr>
         <tr><td colspan='2'><input name="submit" type="submit" value="login"/></td></tr>
     </table>
 </form>
