@@ -16,6 +16,8 @@ public interface UserDao {
 
     public List<SysUser> getAllUsers();
 
-    public void setCurrentUserOnline();
+    public void setUserOnlineByName(String username);
+
+    public void setUserOfflineByName(String username);
 
 }

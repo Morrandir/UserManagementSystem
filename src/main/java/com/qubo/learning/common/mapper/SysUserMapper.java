@@ -18,6 +18,6 @@ public interface SysUserMapper {
     public List<SysUser> getAllUsers();
 
     @Update("update sys_user set online = #{online} where user_name = #{username}")
-    public void setUserOnlineByName(@Param("username")String username, @Param("online")boolean online);
+    public void setUserOnlineStatusByName(@Param("username")String username, @Param("online")boolean online);
 
 }

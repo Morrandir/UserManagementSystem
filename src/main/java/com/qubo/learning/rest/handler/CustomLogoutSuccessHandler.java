@@ -21,10 +21,15 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
     @Autowired
     private UserDao userDao;
 
+    public CustomLogoutSuccessHandler() {
+        this.setDefaultTargetUrl("/logout");
+    }
+
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-        userDao.setCurrentUserOnline();
+        String username = authentication.getName();
+        userDao.setUserOfflineByName(username);
 
         super.onLogoutSuccess(request, response, authentication);
     }

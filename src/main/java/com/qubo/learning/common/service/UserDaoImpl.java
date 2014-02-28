@@ -53,11 +53,13 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     }
 
     @Override
-    public void setCurrentUserOnline() {
+    public void setUserOnlineByName(String username) {
+        userMapper.setUserOnlineStatusByName(username, true);
+    }
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        userMapper.setUserOnlineByName(username, true);
+    @Override
+    public void setUserOfflineByName(String username) {
+        userMapper.setUserOnlineStatusByName(username, false);
     }
 
     @Override
