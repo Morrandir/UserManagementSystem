@@ -17,16 +17,17 @@ import java.util.List;
  * Created by Morrandir on 14-2-27.
  */
 @Controller
-public class ViewController {
-    private static final Logger logger = LoggerFactory.getLogger(ViewController.class);
+@RequestMapping(value = "/user", method = RequestMethod.GET)
+public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserDao userDao;
 
     /**
-     * default access of login.jsp, display the welcome message.
+     * access user_overall.jsp, display all the user status.
      */
-    @RequestMapping(value = {"/view", "/view/all"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/overall", method = RequestMethod.GET)
     public String viewAll(Model model) {
 
         List<SysUser> sysUsers = userDao.getAllUsers();
@@ -37,6 +38,6 @@ public class ViewController {
         }
 
         model.addAttribute("sysUserNames", sysUserNames);
-        return "viewall";
+        return "user_overall";
     }
 }
