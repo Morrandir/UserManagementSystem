@@ -61,8 +61,6 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET )
     public String logout(Model model) {
 
-        userDao.setCurrentUserOnline();
-
         String logoutMessage = "You've been logged out! Please login to access the User Management System.";
 
         model.addAttribute("message", logoutMessage);
