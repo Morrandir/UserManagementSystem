@@ -11,6 +11,6 @@ import java.util.List;
 public interface SysUserRoleMapper {
 
     @Select("select * from sys_user_role where user_id=#{id}")
-    public List<SysUserRole> getUserRoleByUserID(int id);
+    public List<SysUserRole> getUserRolesByUserID(int id);
 
 }

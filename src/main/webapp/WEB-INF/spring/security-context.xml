@@ -10,12 +10,14 @@
 
     <security:http pattern="/login" security="none" />
     <security:http pattern="/login/error" security="none" />
-    <security:http pattern="/logout" security="none" />
+    <security:http pattern="/logout/success" security="none" />
 
     <security:http auto-config="true">
+        <security:intercept-url pattern="/user/add" access="ROLE_ADMIN" />
         <security:intercept-url pattern="/**" access="ROLE_VIEWER" />
-        <security:form-login login-page="/login" authentication-failure-url="/login/error" always-use-default-target="true" default-target-url="/login/success"/>
-        <security:logout success-handler-ref="customLogoutSuccessHandler" />
+        <security:access-denied-handler error-page="/noaccess" />
+        <security:form-login login-page="/login" authentication-success-handler-ref="customAuthenticationSuccessHandler" authentication-failure-url="/login/error" />
+        <security:logout logout-url="/logout" success-handler-ref="customLogoutSuccessHandler" />
     </security:http>
 
     <security:authentication-manager alias="authenticationManager">
@@ -27,7 +29,5 @@
 -->
         </security:authentication-provider>
     </security:authentication-manager>
-
-    <!--<beans:bean id="customLogoutSuccessHandler" class="com.qubo.learning.rest.handler.CustomLogoutSuccessHandler" />-->
 
 </beans>

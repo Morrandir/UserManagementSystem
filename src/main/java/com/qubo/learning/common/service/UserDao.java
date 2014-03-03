@@ -12,7 +12,7 @@ public interface UserDao {
 
     public SysUser getUserByName(String username);
 
-    public List<SysUserRole> getUserRoleByUserID(int id);
+    public List<SysUserRole> getUserRolesByUserID(int id);
 
     public List<SysUser> getAllUsers();
 

@@ -43,8 +43,8 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     }
 
     @Override
-    public List<SysUserRole> getUserRoleByUserID(int id) {
-        return userRoleMapper.getUserRoleByUserID(id);
+    public List<SysUserRole> getUserRolesByUserID(int id) {
+        return userRoleMapper.getUserRolesByUserID(id);
     }
 
     @Override
@@ -75,16 +75,13 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
             throw new UsernameNotFoundException("User \"" + username + "\" not found!");
         }
 
-        sysUserRoles = getUserRoleByUserID(sysUser.getUser_id());
+        sysUserRoles = getUserRolesByUserID(sysUser.getUser_id());
 
-        for (int i = 0; i < sysUserRoles.size(); i++) {
-            authList.add(new SimpleGrantedAuthority(sysUserRoles.get(i).getRole_name()));
+        for (SysUserRole x : sysUserRoles) {
+            authList.add(new SimpleGrantedAuthority(x.getRole_name()));
         }
 
-
-        UserDetails userDetails = new User(sysUser.getUser_name(), sysUser.getPassword(), sysUser.isEnabled(), true, true, true, authList);
-
-        return userDetails;
+        return (new User(sysUser.getUser_name(), sysUser.getPassword(), sysUser.isEnabled(), true, true, true, authList));
     }
 
 

@@ -34,20 +34,6 @@ public class LoginController {
     }
 
     /**
-     * accessing home.jsp after successful login attempts, set user status to online.
-     */
-    @RequestMapping(value = "/login/success", method = RequestMethod.GET )
-    public String login_success() {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-
-        userDao.setUserOnlineByName(username);
-
-        return "home";
-    }
-
-    /**
      * accessing login.jsp after failed login attempts, display the error message.
      */
     @RequestMapping(value = "/login/error", method = RequestMethod.GET )
@@ -63,12 +49,13 @@ public class LoginController {
     /**
      * accessing login.jsp after logout, display the logout message.
      */
-    @RequestMapping(value = "/logout", method = RequestMethod.GET )
-    public String logout(Model model) {
+    @RequestMapping(value = "/logout/success", method = RequestMethod.GET )
+    public String logoutSuccess(Model model) {
 
         String logoutMessage = "You've been logged out! Please login to access the User Management System.";
 
         model.addAttribute("message", logoutMessage);
         return "login";
     }
+
 }

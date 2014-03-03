@@ -30,20 +30,16 @@ public class UserController {
     public String viewAll(Model model) {
 
         List<SysUser> sysUsers = userDao.getAllUsers();
-//        List<String> sysUserNames = new ArrayList<String>();
-//        List<String> sysUserEnabledStatus = new ArrayList<String>();
-//        List<String> sysUserOnlineStatus = new ArrayList<String>();
-
-//        for(int i = 0; i < sysUsers.size(); i++) {
-//            sysUserNames.add(sysUsers.get(i).getUser_name());
-//            sysUserEnabledStatus.add((sysUsers.get(i).isEnabled())? "Enabled":"Disabled");
-//            sysUserOnlineStatus.add((sysUsers.get(i).isOnline())? "Online":"Offline");
-//        }
 
         model.addAttribute("sysUsers", sysUsers);
-//        model.addAttribute("sysUserNames", sysUserNames);
-//        model.addAttribute("sysUserEnabledStatus", sysUserEnabledStatus);
-//        model.addAttribute("sysUserOnlineStatus", sysUserOnlineStatus);
+
         return "user_overall";
     }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addUser(Model model) {
+
+        return "user_add";
+    }
+
 }
