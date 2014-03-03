@@ -36,6 +36,5 @@
         <beans:property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </beans:bean>
 
-    <beans:bean id="customLogoutSuccessHandler" class="com.qubo.learning.rest.handler.CustomLogoutSuccessHandler"/>
 
 </beans>
