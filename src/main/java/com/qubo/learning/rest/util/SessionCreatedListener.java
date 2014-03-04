@@ -1,16 +1,12 @@
-package com.qubo.learning.rest.handler;
+package com.qubo.learning.rest.util;
 
 import com.qubo.learning.common.service.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.session.HttpSessionCreatedEvent;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by Morrandir on 14-3-3.
@@ -18,15 +14,13 @@ import javax.servlet.http.HttpSession;
 //@Component
 public class SessionCreatedListener implements ApplicationListener<HttpSessionCreatedEvent> {
 
-    //@Autowired
+//    @Autowired
     private UserDao userDao;
 
     @Override
     public void onApplicationEvent(HttpSessionCreatedEvent event) {
 
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        HttpSession session = event.getSession();
-
 
         if(securityContext != null) {
             Authentication authentication = securityContext.getAuthentication();

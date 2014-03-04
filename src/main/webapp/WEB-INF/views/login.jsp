@@ -16,13 +16,31 @@
 <h3>${message}</h3>
 <form action='/j_spring_security_check' method='POST'>
     <table>
-        <tr><td>User name:</td><td><label>
-            <input type='text' name='j_username' value=''>
-        </label></td></tr>
-        <tr><td>Password:</td><td><label>
-            <input type='password' name='j_password'/>
-        </label></td></tr>
-        <tr><td colspan='2'><input name="submit" type="submit" value="login"/></td></tr>
+        <tr>
+            <td>User name:</td>
+            <td>
+                <label>
+                    <input type='text' name='j_username' value='' size=15 />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <label>
+                    <input type='password' name='j_password' value='' size=15 />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="submit" type="submit" value="login"/>
+            </td>
+            <td>
+                New user? Click here to
+                <a href = "<c:url value="/register" />">Register</a>
+            </td>
+        </tr>
     </table>
 </form>
 </body>

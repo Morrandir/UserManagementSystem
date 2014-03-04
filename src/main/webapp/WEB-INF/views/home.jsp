@@ -14,6 +14,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<P>  Currently number of users online is ${numOnline}. </P>
 
 <table>
     <tr>

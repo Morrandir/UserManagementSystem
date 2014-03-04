@@ -20,4 +20,6 @@ public interface UserDao {
 
     public void setUserOfflineByName(String username);
 
+    public int getOnlineUserCount();
+
 }

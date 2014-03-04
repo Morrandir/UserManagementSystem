@@ -20,4 +20,6 @@ public interface SysUserMapper {
     @Update("update sys_user set online = #{online} where user_name = #{username}")
     public void setUserOnlineStatusByName(@Param("username")String username, @Param("online")boolean online);
 
+    @Select("select count(user_id) from sys_user where online = #{online}")
+    public int getUserCountByStatus(@Param("online")boolean online);
 }

@@ -61,6 +61,11 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     }
 
     @Override
+    public int getOnlineUserCount() {
+        return userMapper.getUserCountByStatus(true);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         SysUser sysUser;

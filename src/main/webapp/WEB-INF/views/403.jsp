@@ -20,7 +20,7 @@
     Access Denied!
 </h1>
 
-<P>  You have no access to the resource on this page. </P>
+<P>  Sorry, you do not have access to the resource on this page. </P>
 
 <table>
     <tr>

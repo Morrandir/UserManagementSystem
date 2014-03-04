@@ -11,10 +11,11 @@
     <security:http pattern="/login" security="none" />
     <security:http pattern="/login/error" security="none" />
     <security:http pattern="/logout/success" security="none" />
+    <security:http pattern="/register" security="none" />
 
     <security:http auto-config="true">
         <security:intercept-url pattern="/user/add" access="ROLE_ADMIN" />
-        <security:intercept-url pattern="/**" access="ROLE_VIEWER" />
+        <security:intercept-url pattern="/**" access="ROLE_USER" />
         <security:access-denied-handler error-page="/noaccess" />
         <security:form-login login-page="/login" authentication-failure-url="/login/error" authentication-success-handler-ref="customAuthenticationSuccessHandler" />
         <security:logout logout-url="/logout" logout-success-url="/logout/success" />

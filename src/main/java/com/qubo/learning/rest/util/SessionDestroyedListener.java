@@ -1,4 +1,4 @@
-package com.qubo.learning.rest.handler;
+package com.qubo.learning.rest.util;
 
 import com.qubo.learning.common.service.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;

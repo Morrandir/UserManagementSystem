@@ -16,7 +16,6 @@ import java.util.List;
  * Created by Morrandir on 14-2-27.
  */
 @Controller
-@RequestMapping(value = "/user", method = RequestMethod.GET)
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -26,7 +25,7 @@ public class UserController {
     /**
      * access user_overall.jsp, display all the user status.
      */
-    @RequestMapping(value = "/overall", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/overall", method = RequestMethod.GET)
     public String viewAll(Model model) {
 
         List<SysUser> sysUsers = userDao.getAllUsers();
@@ -36,10 +35,16 @@ public class UserController {
         return "user_overall";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addUser(Model model) {
+    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
+    public String loadUserAddForm(Model model) {
 
         return "user_add";
+    }
+
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public String postUserAddForm(Model model) {
+
+        return "user_add_result";
     }
 
 }
