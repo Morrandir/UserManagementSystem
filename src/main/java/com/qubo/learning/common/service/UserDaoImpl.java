@@ -2,6 +2,7 @@ package com.qubo.learning.common.service;
 
 import com.qubo.learning.common.mapper.SysUserMapper;
 import com.qubo.learning.common.mapper.SysUserRoleMapper;
+import com.qubo.learning.common.model.ROLE;
 import com.qubo.learning.common.model.SysUser;
 import com.qubo.learning.common.model.SysUserRole;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -14,8 +15,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Qubo_Song on 2/27/14.
@@ -28,6 +31,18 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
 
     @Autowired
     private SysUserRoleMapper userRoleMapper;
+
+    private static AtomicLong userId;
+    private static AtomicLong roleId;
+
+    @PostConstruct
+    public void init() {
+        userId = new AtomicLong(userMapper.getMaxUserId());
+        roleId = new AtomicLong(userRoleMapper.getMaxRoleId());
+        userId.getAndIncrement();
+        roleId.getAndIncrement();
+    }
+
 
     @Autowired
     @Override
@@ -63,6 +78,24 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     @Override
     public int getOnlineUserCount() {
         return userMapper.getUserCountByStatus(true);
+    }
+
+    @Override
+    public void addUser(String userName, String password, String userRole) {
+
+        ROLE role = ROLE.valueOf(userRole);
+
+        userMapper.addUser((int)userId.get(), userName, password, true, false);
+
+
+        for(int i = 0; i <= role.getIndex(); i++) {
+            userRoleMapper.addRole((int)roleId.get(), (int)userId.get(), ROLE.values()[i].toString());
+            roleId.getAndIncrement();
+        }
+        userId.getAndIncrement();
+
+
+
     }
 
     @Override

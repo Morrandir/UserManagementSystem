@@ -1,5 +1,6 @@
 package com.qubo.learning.common.service;
 
+import com.qubo.learning.common.model.ROLE;
 import com.qubo.learning.common.model.SysUser;
 import com.qubo.learning.common.model.SysUserRole;
 
@@ -21,5 +22,7 @@ public interface UserDao {
     public void setUserOfflineByName(String username);
 
     public int getOnlineUserCount();
+
+    public void addUser(String userName, String password, String userRole);
 
 }

@@ -16,10 +16,10 @@
 
 <script type="text/javascript">
     function validate(action) {
-        var userName = document.addUser.username.value;
+        var userName = document.addUser.userName.value;
         var userWarning = document.getElementById("username_warning");
-        var password1 = document.addUser.password1.value;
-        var p1Warning = document.getElementById("password1_warning")
+        var password = document.addUser.password.value;
+        var pWarning = document.getElementById("password_warning");
         var password2 = document.addUser.password2.value;
         var p2Warning = document.getElementById("password2_warning");
         var invalid;
@@ -29,8 +29,8 @@
         invalid = /[\W\s]/;
         //Alphanumeric characters
         if(userName == "" || invalid.test(userName)) {
-            p1Warning.style.color = "#000000";
-            p1Warning.style.fontWeight = "normal";
+            pWarning.style.color = "#000000";
+            pWarning.style.fontWeight = "normal";
             p2Warning.style.visibility = "hidden";
             userWarning.style.color = "#FF0000";
             userWarning.style.fontWeight = "bold";
@@ -47,24 +47,24 @@
         if(action != "check_username") {
             invalid = /[\W_]/;
             //Alphanumeric characters only allowed
-            if (password1 == "" || invalid.test(password1)) {
+            if (password == "" || invalid.test(password)) {
                 p2Warning.style.visibility = "hidden";
-                p1Warning.style.color = "#FF0000";
-                p1Warning.style.fontWeight = "bold";
+                pWarning.style.color = "#FF0000";
+                pWarning.style.fontWeight = "bold";
                 if(action != "submit") {
                     return false;
                 } else {
                     submitResult = false;
                 }
             } else {
-                p1Warning.style.color = "#000000";
-                p1Warning.style.fontWeight = "normal";
+                pWarning.style.color = "#000000";
+                pWarning.style.fontWeight = "normal";
             }
         }
 
 
         if(action != "check_username" && action != "check_password1") {
-            if(password2 == "" || password2 != document.addUser.password1.value){
+            if(password2 == "" || password2 != document.addUser.password.value){
                 p2Warning.style.visibility = "visible";
                 if(action != "submit") {
                     return false;
@@ -96,7 +96,7 @@
             </td>
             <td>
                 <label>
-                    <input type='text' name='username' value='' size="15" maxlength="20" onblur="validate('check_username')">
+                    <input type='text' name="userName" value='' size="15" maxlength="20" onblur="validate('check_username')">
                 </label>
             </td>
             <td>
@@ -109,11 +109,11 @@
             </td>
             <td>
                 <label>
-                    <input type='password' name='password1' value='' size="15" maxlength="20" onblur="validate('check_password1')">
+                    <input type='password' name="password" value='' size="15" maxlength="20" onblur="validate('check_password1')">
                 </label>
             </td>
             <td>
-                <span name="password1_warning" style='color:#000000;visibility:visible;font-size:12' id="password1_warning"> Cannot be blank. Can only contain alphanumeric characters. </span>
+                <span name="password_warning" style='color:#000000;visibility:visible;font-size:12' id="password1_warning"> Cannot be blank. Can only contain alphanumeric characters. </span>
             </td>
         </tr>
         <tr>
@@ -135,11 +135,11 @@
             </td>
             <td>
                 <label>
-                    <select>
+                    <select name = "userRole">
                         <option value="ROLE_USER">
                             User
                         </option>
-                        <option vaule="ROLE_ADMIN">
+                        <option value="ROLE_ADMIN">
                             Administrator
                         </option>
                     </select>
