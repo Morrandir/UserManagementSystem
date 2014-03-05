@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -31,17 +33,6 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
 
     @Autowired
     private SysUserRoleMapper userRoleMapper;
-
-    private static AtomicLong userId;
-    private static AtomicLong roleId;
-
-    @PostConstruct
-    public void init() {
-        userId = new AtomicLong(userMapper.getMaxUserId());
-        roleId = new AtomicLong(userRoleMapper.getMaxRoleId());
-        userId.getAndIncrement();
-        roleId.getAndIncrement();
-    }
 
 
     @Autowired
@@ -81,19 +72,26 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     }
 
     @Override
-    public void addUser(String userName, String password, String userRole) {
+    @Transactional
+    public void addUser(String userName, String password, String userRole) throws Exception {
 
+        SysUser user;
         ROLE role = ROLE.valueOf(userRole);
 
-        userMapper.addUser((int)userId.get(), userName, password, true, false);
+        try {
+            userMapper.addUser(userName, password, true, false);
+            user = userMapper.getUserByName(userName);
 
+            if (user != null) {
+                for(int i = 0; i <= role.getIndex(); i++) {
+                    userRoleMapper.addRole(user.getUser_id(), ROLE.values()[i].toString());
+                }
+            }
 
-        for(int i = 0; i <= role.getIndex(); i++) {
-            userRoleMapper.addRole((int)roleId.get(), (int)userId.get(), ROLE.values()[i].toString());
-            roleId.getAndIncrement();
+            throw new RuntimeException();
+        } catch(Exception e) {
+            throw new RuntimeException();
         }
-        userId.getAndIncrement();
-
 
 
     }

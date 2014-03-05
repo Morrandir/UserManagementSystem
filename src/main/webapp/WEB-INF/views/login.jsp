@@ -14,7 +14,7 @@
 </head>
 <body>
 <h3>${message}</h3>
-<form action='/j_spring_security_check' method='POST'>
+<form action='${pageContext.request.contextPath}/j_spring_security_check' method='POST'>
     <table>
         <tr>
             <td>User name:</td>

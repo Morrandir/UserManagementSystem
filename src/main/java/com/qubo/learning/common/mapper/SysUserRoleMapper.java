@@ -18,6 +18,6 @@ public interface SysUserRoleMapper {
     @Select("select max(role_id) from sys_user_role")
     public int getMaxRoleId();
 
-    @Insert("insert into sys_user_role values(#{roleId}, #{userId}, #{roleName})")
-    public void addRole(@Param("roleId")int roleId, @Param("userId")int userId, @Param("roleName")String roleName);
+    @Insert("insert into sys_user_role values(default, #{userId}, #{roleName})")
+    public void addRole(@Param("userId")int userId, @Param("roleName")String roleName);
 }

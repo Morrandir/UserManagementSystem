@@ -1,12 +1,19 @@
 package com.qubo.learning.rest.controller;
 
+import com.qubo.learning.common.model.ROLE;
 import com.qubo.learning.common.model.SysUser;
 import com.qubo.learning.common.service.UserDao;
+import com.qubo.learning.rest.util.AddUserForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,6 +30,12 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setRequiredFields("userName", "password", "password2");
+    }
+
+
     /**
      * access user_overall.jsp, display all the user status.
      */
@@ -38,14 +51,19 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String loadUserAddForm(Model model) {
-
+        model.addAttribute("addUserForm", new AddUserForm());
         return "user_add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String postUserAddForm(String userName, String password, String userRole) {
+    public String postUserAddForm(AddUserForm addUserForm) {
 
-        userDao.addUser(userName, password, userRole);
+        try {
+            //userDao.addUser(userName, password, userRole);
+        } catch(Exception e) {
+
+        }
+
         return "user_add_result";
     }
 

@@ -26,6 +26,6 @@ public interface SysUserMapper {
     @Select("select max(user_id) from sys_user")
     public int getMaxUserId();
 
-    @Insert("insert into sys_user values(#{userId}, #{username}, #{password}, #{enabled}, #{online})")
-    public void addUser(@Param("userId")int userId, @Param("username")String username, @Param("password")String password, @Param("enabled")boolean enabled, @Param("online")boolean online);
+    @Insert("insert into sys_user values(default, #{username}, #{password}, #{enabled}, #{online})")
+    public void addUser(@Param("username")String username, @Param("password")String password, @Param("enabled")boolean enabled, @Param("online")boolean online);
 }

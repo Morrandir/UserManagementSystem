@@ -23,6 +23,6 @@ public interface UserDao {
 
     public int getOnlineUserCount();
 
-    public void addUser(String userName, String password, String userRole);
+    public void addUser(String userName, String password, String userRole) throws Exception;
 
 }
