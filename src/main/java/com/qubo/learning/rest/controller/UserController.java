@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class UserController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.setRequiredFields("userName", "password", "password2");
+        binder.setRequiredFields("userName", "password", "confirmPassword");
     }
 
 
@@ -56,7 +57,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String postUserAddForm(AddUserForm addUserForm) {
+    public String postUserAddForm(@Valid AddUserForm addUserForm) {
 
         try {
             //userDao.addUser(userName, password, userRole);
