@@ -16,9 +16,14 @@
 </head>
 <body>
 
-<P> Welcome, <security:authentication property="name" />! </P>
+<c:if test="${origin != 'register'}">
+    <P> Welcome, <security:authentication property="name" />! </P>
+</c:if>
+<c:if test="${origin == 'register'}">
+    <P> Welcome, please provide registration information. </P>
+</c:if>
 
-<form:form action="/user/add" method="post" modelAttribute="addUserForm" >
+<form:form action="/user/${origin}" method="post" modelAttribute="addUserForm" >
 
     <form:errors path="*">
         <div style="color:#FF0000;font-size:13px"> Please fix the problems listed below. </div>
@@ -26,13 +31,13 @@
         <P></P>
     </form:errors>
 
-    <table cellpadding=4 cellspacing=2>
+    <table cellpadding=4 cellspacing=2 border="0.1">
         <tr>
             <td><form:label path="userName"> User name: </form:label></td>
-            <td>
+            <td style="width:160px">
                 <form:input path="userName" required="true" title="Required, between 4-20 characters." pattern=".{4,20}" cssStyle="width:150px" />
-                <form:errors path="userName" cssStyle="color:#FF0000;font-size:13px;width:150px">
-                    <div><form:errors path="userName" htmlEscape="false" /></div>
+                <form:errors path="userName" >
+                    <div><form:errors path="userName" htmlEscape="false" cssStyle="color:#FF0000;font-size:13px" /></div>
                 </form:errors>
             </td>
             <td>
@@ -60,18 +65,25 @@
                 </form:errors>
             </td>
         </tr>
-        <tr>
-            <td><form:label path="userRole"> User role: </form:label></td>
-            <td>
-                <form:select path = "userRole" cssStyle="width:150px">
-                    <form:option value="ROLE_USER"> User </form:option>
-                    <form:option value="ROLE_ADMIN"> Administrator </form:option>
-                </form:select>
-            </td>
-        </tr>
+        <c:if test="${origin != 'register'}">
+            <tr>
+                <td><form:label path="userRole"> User role: </form:label></td>
+                <td>
+                    <form:select path = "userRole" cssStyle="width:150px">
+                        <form:option value="ROLE_USER"> User </form:option>
+                        <form:option value="ROLE_ADMIN"> Administrator </form:option>
+                    </form:select>
+                </td>
+            </tr>
+        </c:if>
         <tr>
             <td colspan="2">
-                <input name="submit" type="submit" value="Add User"/>
+                <c:if test="${origin != 'register'}">
+                    <input name="submit" type="submit" value="Add User"/>
+                </c:if>
+                <c:if test="${origin == 'register'}">
+                    <input name="submit" type="submit" value="Register"/>
+                </c:if>
             </td>
         </tr>
     </table>
@@ -79,25 +91,27 @@
 
 </form:form>
 
-<table>
-    <tr>
-        <td>
-            <a href = "<c:url value="/" />"> Home </a>
-        </td>
-        <td>
-            |
-        </td>
-        <td>
-            <a href = "<c:url value="/user/overall" />"> View all users </a>
-        </td>
-        <td>
-            |
-        </td>
-        <td>
-            <a href = "<c:url value="/logout" />"> Logout </a>
-        </td>
-    </tr>
-</table>
+<c:if test="${origin != 'register'}">
+    <table>
+        <tr>
+            <td>
+                <a href = "<c:url value="/" />"> Home </a>
+            </td>
+            <td>
+                |
+            </td>
+            <td>
+                <a href = "<c:url value="/user/overall" />"> View all users </a>
+            </td>
+            <td>
+                |
+            </td>
+            <td>
+                <a href = "<c:url value="/logout" />"> Logout </a>
+            </td>
+        </tr>
+    </table>
+</c:if>
 
 </body>
 </html>

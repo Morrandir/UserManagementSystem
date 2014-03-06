@@ -38,7 +38,7 @@
             </td>
             <td>
                 New user? Click here to
-                <a href = "<c:url value="/register" />">Register</a>
+                <a href = "<c:url value="/user/register" />">Register</a>
             </td>
         </tr>
     </table>

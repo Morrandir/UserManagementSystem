@@ -47,8 +47,8 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     }
 
     @Override
-    public List<SysUserRole> getUserRolesByUserID(int id) {
-        return userRoleMapper.getUserRolesByUserID(id);
+    public SysUser getUserById(int id) {
+        return userMapper.getUserById(id);
     }
 
     @Override
@@ -92,7 +92,11 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
             throw e;
         }
 
+    }
 
+    @Override
+    public List<SysUserRole> getUserRolesByUserID(int userId) {
+        return userRoleMapper.getUserRolesByUserID(userId);
     }
 
     @Override

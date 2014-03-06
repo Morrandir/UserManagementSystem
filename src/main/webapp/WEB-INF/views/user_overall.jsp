@@ -19,19 +19,19 @@
 
 <h3>Current User Status:</h3>
 
-<table border="0">
+<table>
     <c:forEach var="sysUser" items="${sysUsers}">
             <tr>
                 <td>${sysUser.user_name}</td>
                 <td>
                     <c:choose>
-                        <c:when test="${sysUser.enabled == true}">Enabled</c:when>
+                        <c:when test="${sysUser.enabled}">Enabled</c:when>
                         <c:otherwise>Disabled</c:otherwise>
                     </c:choose>
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${sysUser.online ==true}">Online</c:when>
+                        <c:when test="${sysUser.online}">Online</c:when>
                         <c:otherwise>Offline</c:otherwise>
                     </c:choose>
                 </td>

@@ -13,7 +13,7 @@ public interface UserDao {
 
     public SysUser getUserByName(String username);
 
-    public List<SysUserRole> getUserRolesByUserID(int id);
+    public SysUser getUserById(int id);
 
     public List<SysUser> getAllUsers();
 
@@ -24,5 +24,7 @@ public interface UserDao {
     public int getOnlineUserCount();
 
     public void addUser(String userName, String password, ROLE userRole) throws Exception;
+
+    public List<SysUserRole> getUserRolesByUserID(int userId);
 
 }
