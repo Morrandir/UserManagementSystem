@@ -73,24 +73,23 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
 
     @Override
     @Transactional
-    public void addUser(String userName, String password, String userRole) throws Exception {
+    public void addUser(String userName, String password, ROLE userRole) throws Exception {
 
         SysUser user;
-        ROLE role = ROLE.valueOf(userRole);
 
         try {
             userMapper.addUser(userName, password, true, false);
             user = userMapper.getUserByName(userName);
 
             if (user != null) {
-                for(int i = 0; i <= role.getIndex(); i++) {
+                for(int i = 0; i <= userRole.getIndex(); i++) {
                     userRoleMapper.addRole(user.getUser_id(), ROLE.values()[i].toString());
                 }
             }
 
-            throw new RuntimeException();
+            //throw new RuntimeException();
         } catch(Exception e) {
-            throw new RuntimeException();
+            throw e;
         }
 
 

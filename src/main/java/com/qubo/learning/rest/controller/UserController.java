@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -31,10 +33,17 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setRequiredFields("userName", "password", "confirmPassword");
+    private static void convertPasswordError(BindingResult result) {
+        for(ObjectError error: result.getGlobalErrors()) {
+            String message = error.getDefaultMessage();
+            if ("Your passwords don't match.".equals(message)) {
+                if(!result.hasFieldErrors("password")) {
+                    result.rejectValue("password", message, message);
+                }
+            }
+        }
     }
+
 
 
     /**
@@ -57,12 +66,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String postUserAddForm(@Valid AddUserForm addUserForm) {
+    public String postUserAddForm(@ModelAttribute @Valid AddUserForm addUserForm, BindingResult result) {
+
+        convertPasswordError(result);
+
+        if(result.hasErrors()) {
+            return "user_add";
+        }
 
         try {
-            //userDao.addUser(userName, password, userRole);
+            userDao.addUser(addUserForm.getUserName(), addUserForm.getPassword(), addUserForm.getUserRole());
         } catch(Exception e) {
-
+            if(e.getCause().toString().contains("UNIQUE_SYS_USER_NAME table: SYS_USER")) {
+                result.rejectValue("userName", "User name already taken.", "Sorry, the user name has been taken. Please try another one.");
+            }
+            return "user_add";
         }
 
         return "user_add_result";
