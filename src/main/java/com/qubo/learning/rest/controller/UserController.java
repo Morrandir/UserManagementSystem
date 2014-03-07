@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -47,6 +48,18 @@ public class UserController {
                 }
             }
         }
+    }
+
+    private void autoLogin(String userName, String password, HttpServletRequest request) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userName, password);
+        token.setDetails(new WebAuthenticationDetails(request));
+        Authentication authResult = authenticationManager.authenticate(token);
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(authResult);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
+        userDao.setUserOnlineByName(userName);
     }
 
 
@@ -120,15 +133,10 @@ public class UserController {
         }
 
         if("register".equals(origin)) {
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(addUserForm.getUserName(), addUserForm.getPassword());
-            token.setDetails(new WebAuthenticationDetails(request));
-            Authentication authResult = authenticationManager.authenticate(token);
-            SecurityContext securityContext = SecurityContextHolder.getContext();
-            securityContext.setAuthentication(authResult);
-            userDao.setUserOnlineByName(addUserForm.getUserName());
-            HttpSession session = request.getSession(true);
-            session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+            autoLogin(addUserForm.getUserName(), addUserForm.getPassword(), request);
         }
+
+
         return "redirect:" + userDao.getUserByName(addUserForm.getUserName()).getUser_id();
     }
 

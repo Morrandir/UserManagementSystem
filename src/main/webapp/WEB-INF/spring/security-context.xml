@@ -12,6 +12,7 @@
     <security:http pattern="/login/error" security="none" />
     <security:http pattern="/logout/success" security="none" />
     <security:http pattern="/user/register" security="none" />
+    <security:http pattern="/resources/**" security="none" />
 
     <security:http auto-config="true">
         <security:intercept-url pattern="/user/add" access="ROLE_ADMIN" />

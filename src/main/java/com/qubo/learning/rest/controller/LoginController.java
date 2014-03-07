@@ -31,11 +31,11 @@ public class LoginController {
         String welcomeMessage;
 
         if("/login".equals(uri)) {
-            welcomeMessage = "Welcome! Please login to access the User Management System.";
+            welcomeMessage = "Welcome!";
         } else if("/login/error".equals(uri)) {
-            welcomeMessage = "Login failed! Please login to access the User Management System.";
+            welcomeMessage = "Login failed!";
         } else {
-            welcomeMessage = "You've been logged out! Please login to access the User Management System.";
+            welcomeMessage = "You've been logged out!";
         }
 
         model.addAttribute("message", welcomeMessage);
