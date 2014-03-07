@@ -46,7 +46,7 @@
         <input name="submit" type="submit" value="login" class="btn btn-lg btn-primary btn-block" />
         <P></P>
         <P> New user? Click here to
-            <a href = "<c:url value="/user/register" />"> Register </a>
+            <a href = "<c:url value="/user/register" />" class="btn btn-xm btn-link"> Register </a>
         </P>
     </form>
 </div>

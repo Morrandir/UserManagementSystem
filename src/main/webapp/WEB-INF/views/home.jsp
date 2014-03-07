@@ -23,18 +23,18 @@
 
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
+<div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container" >
+        <div class="navbar-header" >
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"> User Management System </a>
+            <div class="navbar-brand" > User Management System </div>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" style="border:1px solid darkgoldenrod" >
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -53,6 +53,7 @@
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
+        <%--<div class="navbar-brand" style="font-size:10px;margin-left:auto;margin-right:0;border:1px solid red" > Welcome, <security:authentication property="name" />! </div>--%>
     </div>
 </div>
 
@@ -61,7 +62,7 @@
 
 
 <div class="jumbotron">
-    <P> Welcome, <security:authentication property="name" />! </P>
+
     <h1>Hello world!</h1>
     <P>  The time on the server is ${serverTime}. </P>
     <P>  Currently number of users online is ${numOnline}. </P>
@@ -89,6 +90,11 @@
         </td>
     </tr>
 </table>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>
