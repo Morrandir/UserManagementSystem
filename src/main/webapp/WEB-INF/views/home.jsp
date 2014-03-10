@@ -26,15 +26,9 @@
 <div class="navbar navbar-inverse navbar-fixed-top" >
     <div class="container" >
         <div class="navbar-header" >
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="navbar-brand" > User Management System </div>
+            <div class="navbar-brand"  > User Management System </div>
         </div>
-        <div class="navbar-collapse collapse" style="border:1px solid darkgoldenrod" >
+        <div class="navbar-left" >
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -51,14 +45,26 @@
                         <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
+<%--                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"> Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                    </ul>
+                </li>--%>
             </ul>
-        </div><!--/.nav-collapse -->
-        <%--<div class="navbar-brand" style="font-size:10px;margin-left:auto;margin-right:0;border:1px solid red" > Welcome, <security:authentication property="name" />! </div>--%>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"> Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
-
-
-
 
 
 <div class="jumbotron">
@@ -92,7 +98,7 @@
 </table>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="../../resources/js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../../resources/js/bootstrap.min.js"></script>
 
