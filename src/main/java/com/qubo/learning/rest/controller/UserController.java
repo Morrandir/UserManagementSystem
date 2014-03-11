@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
@@ -39,12 +40,17 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+/*    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+
+    }*/
+
     private static void convertPasswordError(BindingResult result) {
         for(ObjectError error: result.getGlobalErrors()) {
             String message = error.getDefaultMessage();
-            if ("Your passwords don't match.".equals(message)) {
-                if(!result.hasFieldErrors("password")) {
-                    result.rejectValue("password", message, message);
+            if ("Your passwords didn't match.".equals(message)) {
+                if(!result.hasFieldErrors("confirmPassword")) {
+                    result.rejectValue("confirmPassword", message, message);
                 }
             }
         }

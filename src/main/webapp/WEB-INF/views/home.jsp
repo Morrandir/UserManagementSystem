@@ -26,11 +26,17 @@
 <div class="navbar navbar-inverse navbar-fixed-top" >
     <div class="container" >
         <div class="navbar-header" >
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <div class="navbar-brand"  > User Management System </div>
         </div>
-        <div class="navbar-left" >
+        <div class="navbar-left navbar-collapse collapse" >
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Home</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
@@ -54,9 +60,9 @@
                 </li>--%>
             </ul>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown"> Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse" >
+            <li class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"  style="color:#429ada" > Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Profile</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>

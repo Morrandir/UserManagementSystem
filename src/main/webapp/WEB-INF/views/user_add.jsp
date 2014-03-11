@@ -13,105 +13,182 @@
 <html>
 <head>
     <title>Add a user</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../../resources/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../resources/css/theme.css" rel="stylesheet">
+
+<%--    <!-- Custom styles for this template -->
+    <link href="../../resources/css/login.css" rel="stylesheet">--%>
+
+
 </head>
 <body>
 
 <c:if test="${origin != 'register'}">
-    <P> Welcome, <security:authentication property="name" />! </P>
+    <div class="navbar navbar-inverse navbar-fixed-top" >
+        <div class="container" >
+            <div class="navbar-header" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand"  > User Management System </div>
+            </div>
+            <div class="navbar-left navbar-collapse collapse" >
+                <ul class="nav navbar-nav">
+                    <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right navbar-collapse collapse" >
+                <li class="dropdown" >
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"  style="color:#429ada" > Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </c:if>
-<c:if test="${origin == 'register'}">
-    <P> Welcome, please provide registration information. </P>
-</c:if>
 
-<form:form action="/user/${origin}" method="post" modelAttribute="addUserForm" >
+<div class="jumbotron">
+    <c:if test="${origin == 'register'}">
+        <P> Welcome, please provide registration information. </P>
+    </c:if>
 
-    <form:errors path="*">
-        <div style="color:#FF0000;font-size:13px"> Please fix the problems listed below. </div>
-        <P></P>
-        <P></P>
-    </form:errors>
+    <div class="container" style="margin-left:0px">
+        <form:form cssClass="form-horizontal" action="/user/${origin}" method="post" modelAttribute="addUserForm" >
 
-    <table cellpadding=4 cellspacing=2 border="0.1">
-        <tr>
-            <td><form:label path="userName"> User name: </form:label></td>
-            <td style="width:160px">
-                <form:input path="userName" required="true" title="Required, between 4-20 characters." pattern=".{4,20}" cssStyle="width:150px" />
+            <form:errors path="*">
+                <div class="form-group has-error" >
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <span class="control-label glyphicon glyphicon-warning-sign"></span>
+                        <span class="control-label"> Please fix the problems listed below. </span>
+                    </div>
+                </div>
+            </form:errors>
+
+            <div class="form-group">
                 <form:errors path="userName" >
-                    <div><form:errors path="userName" htmlEscape="false" cssStyle="color:#FF0000;font-size:13px" /></div>
+                    <div class="has-error">
                 </form:errors>
-            </td>
-            <td>
-                <div> Required. Between 4-20 characters. </div>
-            </td>
-        </tr>
-        <tr>
-            <td><form:label path="password"> Password: </form:label></td>
-            <td>
-                <form:password path="password" required="true" title="Required, between 4-20 characters." pattern=".{4,20}" cssStyle="width:150px" />
-                <form:errors path="password">
-                    <div><form:errors path="password" htmlEscape="false" cssStyle="color:#FF0000;font-size:13px;width:150px" /></div>
+                <label for="userName" class="col-sm-2 control-label"> User Name </label>
+                <div class="form-inline col-sm-10">
+                    <form:input path="userName" id="userName" class="form-control" placeholder="User Name" cssStyle="width:200px" />
+                    <span class="control-label" style="font-weight:normal"> Required, must be 4~20 characters. </span>
+                </div>
+                <form:errors path="userName" >
+                    </div>
                 </form:errors>
-            </td>
-            <td>
-                <div> Required. Between 4-20 characters. </div>
-            </td>
-        </tr>
-        <tr>
-            <td><form:label path="confirmPassword"> Confirm password: </form:label></td>
-            <td>
-                <form:password path="confirmPassword" cssStyle="width:150px" />
-                <form:errors path="confirmPassword">
-                    <div><form:errors path="confirmPassword" htmlEscape="false" cssStyle="color:#FF0000;font-size:13px;width:150px" /></div>
+            </div>
+
+            <div class="form-group">
+                <form:errors path="password" >
+                    <div class="has-error">
                 </form:errors>
-            </td>
-        </tr>
-        <c:if test="${origin != 'register'}">
+                <label for="password" class="col-sm-2 control-label"> Password </label>
+                <div class="form-inline col-sm-10">
+                    <form:password path="password" id="password" class="form-control" placeholder="Password" cssStyle="width:200px" />
+                    <span class="control-label" style="font-weight:normal"> Required, between 4~20 characters. </span>
+                </div>
+                <form:errors path="password" >
+                    </div>
+                </form:errors>
+            </div>
+
+            <div class="form-group">
+                <form:errors path="confirmPassword" >
+                    <div class="has-error">
+                </form:errors>
+                <label for="confirmPassword" class="col-sm-2 control-label"> Confirm Password </label>
+                <div class="form-inline col-sm-10">
+                    <form:password path="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Password" cssStyle="width:200px" />
+                    <form:errors path="confirmPassword" >
+                        <span class="control-label" style="font-weight:normal"> Your passwords didn't match. </span>
+                    </form:errors>
+                </div>
+                <form:errors path="confirmPassword" >
+                    </div>
+                </form:errors>
+            </div>
+
+            <c:if test="${origin != 'register'}">
+                <div class="form-group">
+                    <label for="userRole" class="col-sm-2 control-label"> User Role </label>
+                    <div class="col-sm-10">
+                        <form:select path="userRole" id="userRole" class="form-control" cssStyle="width:200px;">
+                            <form:option selected="true" value="ROLE_USER"> User </form:option>
+                            <form:option value="ROLE_ADMIN"> Administrator </form:option>
+                        </form:select>
+                    </div>
+                </div>
+            </c:if>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <c:if test="${origin != 'register'}">
+                        <button class="btn btn-primary" name="submit" type="submit" > Add User </button>
+                    </c:if>
+                    <c:if test="${origin == 'register'}">
+                        <button class="btn btn-lg btn-success" name="submit" type="submit" > Register </button>
+                    </c:if>
+                </div>
+            </div>
+
+        </form:form>
+    </div>
+
+
+    <c:if test="${origin != 'register'}">
+        <table>
             <tr>
-                <td><form:label path="userRole"> User role: </form:label></td>
                 <td>
-                    <form:select path = "userRole" cssStyle="width:150px">
-                        <form:option value="ROLE_USER"> User </form:option>
-                        <form:option value="ROLE_ADMIN"> Administrator </form:option>
-                    </form:select>
+                    <a href = "<c:url value="/" />"> Home </a>
+                </td>
+                <td>
+                    |
+                </td>
+                <td>
+                    <a href = "<c:url value="/user/overall" />"> View all users </a>
+                </td>
+                <td>
+                    |
+                </td>
+                <td>
+                    <a href = "<c:url value="/logout" />"> Logout </a>
                 </td>
             </tr>
-        </c:if>
-        <tr>
-            <td colspan="2">
-                <c:if test="${origin != 'register'}">
-                    <input name="submit" type="submit" value="Add User"/>
-                </c:if>
-                <c:if test="${origin == 'register'}">
-                    <input name="submit" type="submit" value="Register"/>
-                </c:if>
-            </td>
-        </tr>
-    </table>
+        </table>
+    </c:if>
+</div>
 
 
-</form:form>
-
-<c:if test="${origin != 'register'}">
-    <table>
-        <tr>
-            <td>
-                <a href = "<c:url value="/" />"> Home </a>
-            </td>
-            <td>
-                |
-            </td>
-            <td>
-                <a href = "<c:url value="/user/overall" />"> View all users </a>
-            </td>
-            <td>
-                |
-            </td>
-            <td>
-                <a href = "<c:url value="/logout" />"> Logout </a>
-            </td>
-        </tr>
-    </table>
-</c:if>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../resources/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>
