@@ -12,46 +12,99 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../../resources/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../resources/css/jumbotron-narrow.css" rel="stylesheet">
+
 </head>
 <body>
 
-<P> Welcome, <security:authentication property="name" />! </P>
+<div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container" >
+        <div class="navbar-header" >
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand"  > User Management System </div>
+        </div>
+        <div class="navbar-left navbar-collapse collapse" >
+            <ul class="nav navbar-nav">
+                <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse" >
+            <li class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"  style="color:#429ada" > Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="${pageContext.request.contextPath}/user/profile">Profile</a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
 
-<c:if test="${origin == 'add'}">
-    <h3>
-        User has been added successfully!
-    </h3>
-</c:if>
-<c:if test="${origin == 'register'}">
-    <h3>
-        You have been registered successfully!
-    </h3>
-</c:if>
+<div class="container">
+    <div class="jumbotron">
+        <c:if test="${origin == 'add'}">
+            <h3>
+                User has been added successfully!
+            </h3>
+        </c:if>
+        <c:if test="${origin == 'register'}">
+            <h3>
+                You have been registered successfully!
+            </h3>
+        </c:if>
 
-<P>  User details: </P>
+        <P>  User details: </P>
 
-<table>
-    <tr>
-        <td>
-            User name:
-        </td>
-        <td>
-            ${sysUser.user_name}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Status:
-        </td>
-        <td>
-            <c:choose>
-                <c:when test="${sysUser.enabled}">Enabled</c:when>
-                <c:otherwise>Disabled</c:otherwise>
-            </c:choose>
-        </td>
-    </tr>
-</table>
+        <table>
+            <tr>
+                <td>
+                    User name:
+                </td>
+                <td>
+                    ${sysUser.user_name}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Status:
+                </td>
+                <td>
+                    <c:choose>
+                        <c:when test="${sysUser.enabled}">Enabled</c:when>
+                        <c:otherwise>Disabled</c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
+        </table>
 
+    </div>
+</div>
 
 
 <table>
@@ -73,6 +126,11 @@
         </td>
     </tr>
 </table>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../resources/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

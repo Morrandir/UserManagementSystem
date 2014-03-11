@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,8 +86,20 @@ public class UserController {
         return "user_overall";
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String viewUserProfile() {
+        User user = (User)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return "redirect:" + userDao.getUserByName(user.getUsername()).getUser_id();
+    }
+
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public String viewUserById(@PathVariable int userId, @RequestParam(value = "origin", required = false)String origin, Model model) {
+
+        User user = (User)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        GrantedAuthority targetAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
+        if(userId != userDao.getUserByName(user.getUsername()).getUser_id() && !user.getAuthorities().contains(targetAuthority)) {
+            return "403";
+        }
 
         if(origin != null) {
             model.addAttribute("origin", origin);

@@ -58,7 +58,7 @@
             <li class="dropdown" >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"  style="color:#429ada" > Welcome, <security:authentication property="name" />! <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/profile">Profile</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
                 </ul>
             </li>
@@ -66,8 +66,9 @@
     </div>
 </div>
 
-<div class="container">
+<security:authorize ifAnyGranted="ROLE_ADMIN" var="isAdmin" />
 
+<div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Current User Status</h3>
@@ -85,22 +86,26 @@
                     <tbody>
                         <c:forEach var="sysUser" items="${sysUsers}">
                             <tr>
-                                <td>${sysUser.user_name}</td>
+                                <td>
+                                    <c:if test="${isAdmin}">
+                                        <a href="${pageContext.request.contextPath}/user/${sysUser.user_id}">
+                                    </c:if>
+                                ${sysUser.user_name}
+                                    <c:if test="${isAdmin}">
+                                        </a>
+                                    </c:if>
+                                </td>
                                     <c:choose>
                                         <c:when test="${sysUser.enabled}">
                                             <td>
                                                 <span class="glyphicon glyphicon-ok text-success"></span>
-                                                <security:authorize ifAnyGranted='ROLE_ADMIN' var="isAdmin">
-                                                    <c:if test="${isAdmin}"> (<a href="/user/disable/${sysUser.user_id}">Disable</a>) </c:if>
-                                                </security:authorize>
+                                                <c:if test="${isAdmin}"> (<a href="${pageContext.request.contextPath}/user/disable/${sysUser.user_id}">Disable</a>) </c:if>
                                             </td>
                                         </c:when>
                                         <c:otherwise>
                                             <td>
                                                 <span class="glyphicon glyphicon-remove text-success"></span>
-                                                <security:authorize ifAnyGranted='ROLE_ADMIN' var="isAdmin">
-                                                    <c:if test="${isAdmin}"> (<a href="/user/enable/${sysUser.user_id}">Enable</a>) </c:if>
-                                                </security:authorize>
+                                                <c:if test="${isAdmin}"> (<a href="${pageContext.request.contextPath}/user/enable/${sysUser.user_id}">Enable</a>) </c:if>
                                             </td>
                                         </c:otherwise>
                                     </c:choose>
