@@ -84,31 +84,36 @@
 
     <div class="jumbotron">
 
-        <img data-src="holder.js/140x140" alt="avatar" class="img-thumbnail">
+        <div style="display:inline">
+            <img data-src="holder.js/140x140" alt="avatar" class="img-thumbnail">
+            <span>test</span>
+        </div>
 
-        <P>  User details: </P>
+        <div  style="display:inline" >
+            <P>  User details: </P>
 
-        <table>
-            <tr>
-                <td>
-                    User name:
-                </td>
-                <td>
-                    ${sysUser.user_name}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Status:
-                </td>
-                <td>
-                    <c:choose>
-                        <c:when test="${sysUser.enabled}">Enabled</c:when>
-                        <c:otherwise>Disabled</c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td>
+                        User name:
+                    </td>
+                    <td>
+                        ${sysUser.user_name}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Status:
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${sysUser.enabled}">Enabled</c:when>
+                            <c:otherwise>Disabled</c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
     </div>
 </div>
