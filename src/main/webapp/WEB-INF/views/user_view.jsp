@@ -18,8 +18,11 @@
     <!-- Bootstrap theme -->
     <link href="../../resources/css/bootstrap-theme.min.css" rel="stylesheet">
 
+    <!-- Documentation extras -->
+    <link href="../../resources/css/docs.min.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
-    <link href="../../resources/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../../resources/css/theme.css" rel="stylesheet">
 
 </head>
 <body>
@@ -66,18 +69,22 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="max-width:730px">
+
+    <c:if test="${origin == 'add'}">
+        <h3>
+            User has been added successfully!
+        </h3>
+    </c:if>
+    <c:if test="${origin == 'register'}">
+        <h3>
+            You have been registered successfully!
+        </h3>
+    </c:if>
+
     <div class="jumbotron">
-        <c:if test="${origin == 'add'}">
-            <h3>
-                User has been added successfully!
-            </h3>
-        </c:if>
-        <c:if test="${origin == 'register'}">
-            <h3>
-                You have been registered successfully!
-            </h3>
-        </c:if>
+
+        <img data-src="holder.js/140x140" alt="avatar" class="img-thumbnail">
 
         <P>  User details: </P>
 
@@ -131,6 +138,8 @@
 <script src="../../resources/js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../../resources/js/bootstrap.min.js"></script>
+
+<script src="../../resources/js/docs.min.js"></script>
 
 </body>
 </html>
