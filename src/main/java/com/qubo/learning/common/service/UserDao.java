@@ -25,6 +25,6 @@ public interface UserDao {
 
     public void addUser(String userName, String password, ROLE userRole) throws Exception;
 
-    public List<SysUserRole> getUserRolesByUserID(int userId);
+    public List<ROLE> getUserRolesByUserID(int userId);
 
 }

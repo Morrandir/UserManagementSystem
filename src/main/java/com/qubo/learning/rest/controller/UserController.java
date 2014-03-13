@@ -2,6 +2,7 @@ package com.qubo.learning.rest.controller;
 
 import com.qubo.learning.common.model.ROLE;
 import com.qubo.learning.common.model.SysUser;
+import com.qubo.learning.common.model.SysUserRole;
 import com.qubo.learning.common.service.UserDao;
 import com.qubo.learning.rest.util.AddUserForm;
 import org.slf4j.Logger;
@@ -97,6 +98,10 @@ public class UserController {
 
         User user = (User)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         GrantedAuthority targetAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
+        List<ROLE> userRoles;
+        String userType = "";
+
+
         if(userId != userDao.getUserByName(user.getUsername()).getUser_id() && !user.getAuthorities().contains(targetAuthority)) {
             return "403";
         }
@@ -105,7 +110,19 @@ public class UserController {
             model.addAttribute("origin", origin);
         }
 
+        userRoles =  userDao.getUserRolesByUserID(userId);
+
+        if(userRoles != null) {
+            if(userRoles.contains(ROLE.ROLE_ADMIN)) {
+                userType = "Administrator";
+            } else if(userRoles.contains(ROLE.ROLE_USER)) {
+                userType = "User";
+            }
+        }
+
         model.addAttribute("sysUser", userDao.getUserById(userId));
+        model.addAttribute("userType", userType);
+
         return "user_view";
     }
 
