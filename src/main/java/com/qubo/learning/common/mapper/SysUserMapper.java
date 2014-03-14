@@ -31,4 +31,7 @@ public interface SysUserMapper {
 
     @Insert("insert into sys_user values(default, #{username}, #{password}, #{enabled}, #{online})")
     public void addUser(@Param("username")String username, @Param("password")String password, @Param("enabled")boolean enabled, @Param("online")boolean online);
+
+    @Update("update sys_user set enabled = #{isEnabled} where user_id = #{user_id}")
+    public void setUserEnabledStatusById(@Param("user_id") int user_id, @Param("isEnabled") boolean isEnabled);
 }

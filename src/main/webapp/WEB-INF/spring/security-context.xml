@@ -16,6 +16,8 @@
 
     <security:http auto-config="true">
         <security:intercept-url pattern="/user/add" access="ROLE_ADMIN" />
+        <security:intercept-url pattern="/user/disable/**" access="ROLE_ADMIN" />
+        <security:intercept-url pattern="/user/enable/**" access="ROLE_ADMIN" />
         <security:intercept-url pattern="/**" access="ROLE_USER" />
         <security:access-denied-handler error-page="/noaccess" />
         <security:form-login login-page="/login" authentication-failure-url="/login/error" authentication-success-handler-ref="customAuthenticationSuccessHandler" />

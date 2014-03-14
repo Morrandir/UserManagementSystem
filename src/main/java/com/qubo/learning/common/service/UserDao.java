@@ -27,4 +27,8 @@ public interface UserDao {
 
     public List<ROLE> getUserRolesByUserID(int userId);
 
+    public void disableUserById(int userId);
+
+    public void enableUserById(int userId);
+
 }

@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by Morrandir on 14-3-1.
+ * Created by Qubo_Song on 3/14/14.
  */
 @Controller
-public class AccessController {
+@RequestMapping(value = "/bbs")
+public class BBSController {
 
     @Autowired
     private UserDao userDao;
@@ -21,9 +22,10 @@ public class AccessController {
         return userDao.getOnlineUserCount();
     }
 
-    @RequestMapping(value = "/noaccess", method = RequestMethod.GET)
-    public String AccessDenied () {
-        return "403";
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String getBBSMainPage() {
+        return "bbs";
     }
+
 
 }

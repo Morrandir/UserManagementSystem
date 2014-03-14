@@ -116,6 +116,16 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao, UserDe
     }
 
     @Override
+    public void disableUserById(int userId) {
+        userMapper.setUserEnabledStatusById(userId, false);
+    }
+
+    @Override
+    public void enableUserById(int userId) {
+        userMapper.setUserEnabledStatusById(userId, true);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         SysUser sysUser;

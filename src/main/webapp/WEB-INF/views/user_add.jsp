@@ -29,6 +29,9 @@
 </head>
 <body>
 
+<security:authorize ifAnyGranted="ROLE_ADMIN" var="isAdmin" />
+
+
 <c:if test="${origin != 'register'}">
     <div class="navbar navbar-inverse navbar-fixed-top" >
         <div class="container" >
@@ -44,20 +47,23 @@
             <div class="navbar-left navbar-collapse collapse" >
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/bbs">BBS</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                    <c:if test="${isAdmin}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Maintenance <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header"> User Management </li>
+                                <li><a href="${pageContext.request.contextPath}/user/overall"> View all users </a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/add"> Add a new user </a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header"> Placeholder </li>
+                                <li><a href="#"> Placeholder </a></li>
+                                <li><a href="#"> Placeholder </a></li>
+                            </ul>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right navbar-collapse collapse" >
@@ -67,6 +73,9 @@
                         <li><a href="${pageContext.request.contextPath}/user/profile">Profile</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/user/overall"> Users online: ${numOnline} </a>
                 </li>
             </ul>
         </div>
@@ -159,30 +168,6 @@
 
         </form:form>
     </div>
-
-
-    <c:if test="${origin != 'register'}">
-        <table>
-            <tr>
-                <td>
-                    <a href = "<c:url value="/" />"> Home </a>
-                </td>
-                <td>
-                    |
-                </td>
-                <td>
-                    <a href = "<c:url value="/user/overall" />"> View all users </a>
-                </td>
-                <td>
-                    |
-                </td>
-                <td>
-                    <a href = "<c:url value="/logout" />"> Logout </a>
-                </td>
-            </tr>
-        </table>
-    </c:if>
-</div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

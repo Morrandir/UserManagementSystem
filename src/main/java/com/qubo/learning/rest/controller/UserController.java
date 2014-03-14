@@ -44,10 +44,10 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-/*    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-
-    }*/
+    @ModelAttribute("numOnline")
+    int getOnlineUserCount() {
+        return userDao.getOnlineUserCount();
+    }
 
     private static void convertPasswordError(BindingResult result) {
         for(ObjectError error: result.getGlobalErrors()) {
@@ -178,4 +178,18 @@ public class UserController {
         return "redirect:" + userDao.getUserByName(addUserForm.getUserName()).getUser_id();
     }
 
+
+    @RequestMapping(value = {"/disable/{userId}", "/enable/{userId}"}, method = RequestMethod.GET)
+    public String changeUserStatus(@PathVariable int userId, HttpServletRequest request) {
+
+        if(request.getServletPath().contains("disable")) {
+            userDao.disableUserById(userId);
+        } else {
+            userDao.enableUserById(userId);
+        }
+
+        return "redirect:../overall";
+    }
+
 }
+
