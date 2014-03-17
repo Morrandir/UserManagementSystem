@@ -46,6 +46,10 @@
         <beans:property name="mapperInterface" value="com.qubo.learning.common.mapper.SysUserRoleMapper" />
         <beans:property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </beans:bean>
+    <beans:bean id="postMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <beans:property name="mapperInterface" value="com.qubo.learning.common.mapper.SysPostMapper" />
+        <beans:property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </beans:bean>
 
 
 </beans>

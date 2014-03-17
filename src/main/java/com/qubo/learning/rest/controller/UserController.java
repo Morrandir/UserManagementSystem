@@ -164,7 +164,7 @@ public class UserController {
             }
             userDao.addUser(addUserForm.getUserName(), addUserForm.getPassword(), addUserForm.getUserRole());
         } catch(Exception e) {
-            if(e.getCause().toString().contains("UNIQUE_SYS_USER_NAME table: SYS_USER")) {
+            if(e.getCause().toString().contains("UNIQUE_SYS_USER_NAME")) {
                 result.rejectValue("userName", "User name already taken.", "Sorry, the user name has been taken. Please try another one.");
             }
             return "user_add";

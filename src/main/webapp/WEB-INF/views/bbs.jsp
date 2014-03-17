@@ -80,8 +80,12 @@
     </div>
 </div>
 
-<div class="container" style="float:left">
+<%--<div class="container" style="float:left">
     <a class="btn btn-lg btn-primary"> Up </a>
+</div>--%>
+
+<div class="container">
+    <span class="btn btn-xs btn-link"> Previous </span>
 </div>
 
 <div class="jumbotron">
