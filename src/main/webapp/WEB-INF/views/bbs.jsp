@@ -7,6 +7,7 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -85,21 +86,73 @@
 </div>--%>
 
 <div class="container">
-    <span class="btn btn-xs btn-link"> Previous </span>
+    <c:if test="${currentPage == 1}">
+        <span class="btn btn-xs btn-link disabled"> Previous </span>
+    </c:if>
+    <c:if test="${currentPage > 1}">
+        <span><a href="${currentPage - 1}" class="btn btn-xs btn-link"> Previous </a></span>
+    </c:if>
+
+
+    <c:set var="lowerBound" value="${currentPage - 3}" />
+    <c:if test="${lowerBound < 1}"><c:set var="lowerBound" value="1" /></c:if>
+    <c:set var="upperBound" value="${currentPage + 3}" />
+    <c:if test="${upperBound > totalPage}"><c:set var="upperBound" value="${totalPage}" /></c:if>
+
+    <c:if test="${lowerBound > 1}">
+        <span><a href="1" class="btn btn-xs btn-link"> 1 </a></span>
+    </c:if>
+    <c:if test="${lowerBound > 2}">
+        <span> ... </span>
+    </c:if>
+
+    <c:forEach begin="${lowerBound}" end="${upperBound}" var="i">
+        <c:if test="${currentPage == i}">
+            <span class="btn btn-xs btn-link disabled"> ${i} </span>
+        </c:if>
+        <c:if test="${currentPage != i}">
+            <span><a href="${i}" class="btn btn-xs btn-link"> ${i} </a></span>
+        </c:if>
+    </c:forEach>
+
+    <c:if test="${upperBound < totalPage - 1}">
+        <span> ... </span>
+    </c:if>
+    <c:if test="${upperBound < totalPage}">
+        <span><a href="${totalPage}" class="btn btn-xs btn-link"> ${totalPage} </a></span>
+    </c:if>
+
+    <c:if test="${currentPage == totalPage}">
+        <span class="btn btn-xs btn-link disabled"> Next </span>
+    </c:if>
+    <c:if test="${currentPage < totalPage}">
+        <span><a href="${currentPage + 1}" class="btn btn-xs btn-link"> Next </a></span>
+    </c:if>
+
 </div>
 
 <div class="jumbotron">
     <div class="container">
-        <div class="table-responsive">
-            <table class="table table-hover">
+        <div >
+            <table class="table" style="table-layout:fixed">
                 <thead>
                 <tr>
                     <th scope="col" class="col-xs-1"> # </th>
                     <th scope="col" class="col-xs-5"> Topic </th>
-                    <th scope="col" class="col-xs-3"> Last Update Time </th>
-                    <th scope="col" class="col-xs-3"> Poster </th>
+                    <th scope="col" class="col-xs-2"> Last Update Time </th>
+                    <th scope="col" class="col-xs-2"> Poster </th>
                 </tr>
                 </thead>
+                <tbody>
+                <c:forEach var="post" items="${posts}">
+                    <tr>
+                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><a href="../post/${post.post_id}"> ${post.post_id} </a></td>
+                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><a href="../post/${post.post_id}"> ${post.post_title} </a></td>
+                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><fmt:formatDate value="${post.last_modified_time}" pattern="yyyy-MM-ss HH:mm:ss" /></td>
+                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><a href="../../user/${post.user.user_id}"> ${post.user.user_name} </a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
         </div>
     </div>

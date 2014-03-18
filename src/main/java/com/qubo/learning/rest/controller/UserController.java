@@ -88,8 +88,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String viewUserProfile() {
+    public String viewUserProfile(Model model) {
         User user = (User)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.asMap().clear();
         return "redirect:" + userDao.getUserByName(user.getUsername()).getUser_id();
     }
 
@@ -174,13 +175,13 @@ public class UserController {
             autoLogin(addUserForm.getUserName(), addUserForm.getPassword(), request);
         }
 
-
+        model.asMap().remove("numOnline");
         return "redirect:" + userDao.getUserByName(addUserForm.getUserName()).getUser_id();
     }
 
 
     @RequestMapping(value = {"/disable/{userId}", "/enable/{userId}"}, method = RequestMethod.GET)
-    public String changeUserStatus(@PathVariable int userId, HttpServletRequest request) {
+    public String changeUserStatus(@PathVariable int userId, HttpServletRequest request, Model model) {
 
         if(request.getServletPath().contains("disable")) {
             userDao.disableUserById(userId);
@@ -188,6 +189,7 @@ public class UserController {
             userDao.enableUserById(userId);
         }
 
+        model.asMap().clear();
         return "redirect:../overall";
     }
 

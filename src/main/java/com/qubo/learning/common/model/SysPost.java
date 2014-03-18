@@ -9,7 +9,7 @@ public class SysPost {
     private int post_id;
     private String post_title;
     private String post_content;
-    private int user_id;
+    private SysUser user;
     private Timestamp post_time;
     private Timestamp last_modified_time;
 
@@ -37,12 +37,12 @@ public class SysPost {
         this.post_content = post_content;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public SysUser getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(SysUser user) {
+        this.user = user;
     }
 
     public Timestamp getPost_time() {

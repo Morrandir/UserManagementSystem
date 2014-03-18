@@ -36,10 +36,6 @@ public class PostDaoImpl extends SqlSessionDaoSupport implements PostDao {
 
     @Override
     public List<SysPost> getAllPosts() {
-
-        List<SysPost> posts;
-        posts = postMapper.getAllPosts();
-
-        return null;
+        return postMapper.getAllPosts();
     }
 }
