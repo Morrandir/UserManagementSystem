@@ -92,7 +92,7 @@
 
             <form:errors path="*">
                 <div class="form-group has-error" >
-                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="col-sm-offset-2 col-sm-5 alert alert-danger">
                         <span class="control-label glyphicon glyphicon-warning-sign"></span>
                         <span class="control-label"> Please fix the problems listed below. </span>
                     </div>
@@ -105,10 +105,13 @@
                 </form:errors>
                 <label for="userName" class="col-sm-2 control-label"> User Name </label>
                 <div class="form-inline col-sm-10">
-                    <form:input path="userName" id="userName" class="form-control" placeholder="User Name" cssStyle="width:200px" />
+                    <form:input path="userName" id="userName" class="form-control" placeholder="User Name" cssStyle="width:200px"/>
                     <span class="control-label" style="font-weight:normal"> Required, must be 4~20 characters. </span>
                 </div>
                 <form:errors path="userName" >
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <form:errors path="userName" cssClass="control-label"/>
+                    </div>
                     </div>
                 </form:errors>
             </div>

@@ -12,4 +12,7 @@ public interface PostDao {
     public int getTotalPostsCount();
 
     public List<SysPost> getAllPosts();
+
+    public SysPost getPostById(int postId);
+
 }

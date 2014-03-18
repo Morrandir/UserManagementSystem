@@ -22,8 +22,8 @@ public class AddUserForm {
     private ROLE userRole;
 
     @NotNull
-    @NotBlank(message = "User name cannot be blank.")
-    @Size(min = 4, max = 20, message = "User name is required, length must be 4-20 characters.")
+    @NotBlank(message = "")
+    @Size(min = 4, max = 20, message = "")
     public String getUserName() {
         return userName;
     }

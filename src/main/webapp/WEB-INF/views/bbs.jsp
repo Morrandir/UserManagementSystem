@@ -86,13 +86,8 @@
 </div>--%>
 
 <div class="container">
-    <c:if test="${currentPage == 1}">
-        <span class="btn btn-xs btn-link disabled"> Previous </span>
-    </c:if>
-    <c:if test="${currentPage > 1}">
-        <span><a href="${currentPage - 1}" class="btn btn-xs btn-link"> Previous </a></span>
-    </c:if>
 
+    <span><a href="${currentPage - 1}" class="btn btn-xs btn-link <c:if test="${currentPage == 1}">disabled</c:if>"> Previous </a></span>
 
     <c:set var="lowerBound" value="${currentPage - 3}" />
     <c:if test="${lowerBound < 1}"><c:set var="lowerBound" value="1" /></c:if>
@@ -107,12 +102,7 @@
     </c:if>
 
     <c:forEach begin="${lowerBound}" end="${upperBound}" var="i">
-        <c:if test="${currentPage == i}">
-            <span class="btn btn-xs btn-link disabled"> ${i} </span>
-        </c:if>
-        <c:if test="${currentPage != i}">
-            <span><a href="${i}" class="btn btn-xs btn-link"> ${i} </a></span>
-        </c:if>
+        <span><a href="${i}" class="btn btn-xs <c:if test="${currentPage == i}">btn-info disabled</c:if>"> ${i} </a></span>
     </c:forEach>
 
     <c:if test="${upperBound < totalPage - 1}">
@@ -122,12 +112,7 @@
         <span><a href="${totalPage}" class="btn btn-xs btn-link"> ${totalPage} </a></span>
     </c:if>
 
-    <c:if test="${currentPage == totalPage}">
-        <span class="btn btn-xs btn-link disabled"> Next </span>
-    </c:if>
-    <c:if test="${currentPage < totalPage}">
-        <span><a href="${currentPage + 1}" class="btn btn-xs btn-link"> Next </a></span>
-    </c:if>
+    <span><a href="${currentPage + 1}" class="btn btn-xs btn-link <c:if test="${currentPage == totalPage}">disabled</c:if>"> Next </a></span>
 
 </div>
 

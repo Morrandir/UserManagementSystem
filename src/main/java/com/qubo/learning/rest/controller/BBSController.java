@@ -22,7 +22,7 @@ public class BBSController {
      * be configurable in a per-session manner, here we just
      * set it temporarily for convenience.
      */
-    final int MAX_POSTS_PER_PAGE = 10;
+    final int MAX_POSTS_PER_PAGE = 1;
 
     @Autowired
     private UserDao userDao;
@@ -67,6 +67,14 @@ public class BBSController {
     @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
     public String getPost(@PathVariable int postId, Model model) {
 
+        SysPost post = postDao.getPostById(postId);
+
+        if(post == null) {
+            model.asMap().clear();
+            return "redirect:../page/1";
+        }
+
+        model.addAttribute("post", post);
         return "post";
     }
 

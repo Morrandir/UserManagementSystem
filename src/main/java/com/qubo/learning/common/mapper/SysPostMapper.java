@@ -2,10 +2,7 @@ package com.qubo.learning.common.mapper;
 
 import com.qubo.learning.common.model.SysPost;
 import com.qubo.learning.common.model.SysUser;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,5 +21,12 @@ public interface SysPostMapper {
                     one = @One(select = "com.qubo.learning.common.mapper.SysUserMapper.getUserById"))
     )
     public List<SysPost> getAllPosts();
+
+    @Select("select * from sys_post where post_id = #{post_id}")
+    @Results(
+            @Result(property = "user", column = "user_id", javaType = SysUser.class,
+                    one = @One(select = "com.qubo.learning.common.mapper.SysUserMapper.getUserById"))
+    )
+    public SysPost getPostById(@Param("post_id") int postId);
 
 }
