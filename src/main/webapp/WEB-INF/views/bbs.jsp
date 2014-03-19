@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home</title>
+    <title>BBS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
