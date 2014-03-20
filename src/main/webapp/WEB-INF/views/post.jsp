@@ -75,15 +75,16 @@
 </div>
 
 
-<div class="container list-inline">
+<div class="container">
     <span> Poster: </span>
-    <span> ${post.user.user_name} </span>
+    <span><a href="${pageContext.request.contextPath}/user/${post.user.user_id}"> ${post.user.user_name} </a></span>
     <span> Post time: </span>
-    <span> ${post.post_time} </span>
-</div>
+    <span><fmt:formatDate value="${post.last_modified_time}" pattern="yyyy-MM-ss HH:mm:ss" /></span>
 
-<div class="well">
-    ${post.post_content}
+    <div class="well">
+        ${post.post_content}
+    </div>
+
 </div>
 
 
