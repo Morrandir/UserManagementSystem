@@ -76,13 +76,27 @@
 
 
 <div class="container">
-    <span> Poster: </span>
-    <span><a href="${pageContext.request.contextPath}/user/${post.user.user_id}"> ${post.user.user_name} </a></span>
-    <span> Post time: </span>
-    <span><fmt:formatDate value="${post.last_modified_time}" pattern="yyyy-MM-ss HH:mm:ss" /></span>
+
+
 
     <div class="well">
-        ${post.post_content}
+        <div>
+            <span> [ Poster: </span>
+            <span><a href="${pageContext.request.contextPath}/user/${post.user.user_id}"> ${post.user.user_name} </a></span>
+            <span> ] </span>
+        </div>
+        <div>
+            <span> [ Original post time: </span>
+            <span><fmt:formatDate value="${post.last_modified_time}" pattern="yyyy-MM-ss HH:mm:ss" /></span>
+            <span> ] </span>
+        </div>
+        <div>
+            <span><br></span>
+            <span> [ Post title: </span>
+            <span> ${post.post_title} </span>
+            <span> ]<br> </span>
+        </div>
+        <div><br>${post.post_content}</div>
     </div>
 
 </div>
