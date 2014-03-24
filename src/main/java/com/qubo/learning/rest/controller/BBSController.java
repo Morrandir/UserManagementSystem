@@ -22,7 +22,7 @@ public class BBSController {
      * be configurable in a per-session manner, here we just
      * set it temporarily for convenience.
      */
-    final int MAX_POSTS_PER_PAGE = 1;
+    final int MAX_POSTS_PER_PAGE = 10;
 
     @Autowired
     private UserDao userDao;
@@ -78,5 +78,16 @@ public class BBSController {
         return "post";
     }
 
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String getNewPostForm(Model model) {
+
+        model.addAttribute("newPostForm", new SysPost());
+        return "post_new";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String postNewPostForm(Model model) {
+        return "bbs";
+    }
 
 }

@@ -94,9 +94,15 @@
             <span><br></span>
             <span> [ Post title: </span>
             <span> ${post.post_title} </span>
-            <span> ]<br> </span>
+            <span> ] </span>
         </div>
         <div><br>${post.post_content}</div>
+
+        <div class="btn-group-xs">
+            <br>
+            <a href="${pageContext.request.contextPath}/bbs/post/reply/${post.post_id}" class="btn btn-primary"> Reply </a>
+            <a href="javascript:javascript:history.go(-1)" class="btn btn-primary"> Back </a>
+        </div>
     </div>
 
 </div>

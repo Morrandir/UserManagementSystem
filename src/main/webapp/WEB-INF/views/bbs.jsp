@@ -85,7 +85,9 @@
     <a class="btn btn-lg btn-primary"> Up </a>
 </div>--%>
 
-<div class="container">
+<div class="container btn-group-xs" style="margin-bottom:1px">
+
+    <span><a href="${pageContext.request.contextPath}/bbs/new" class="btn btn-xs btn-primary"> New Post </a></span>
 
     <span><a href="${currentPage - 1}" class="btn btn-xs btn-link <c:if test="${currentPage == 1}">" disabled="disabled</c:if>"> Previous </a></span>
 
@@ -124,7 +126,7 @@
                 <tr>
                     <th scope="col" class="col-xs-1"> # </th>
                     <th scope="col" class="col-xs-5"> Topic </th>
-                    <th scope="col" class="col-xs-2"> Last Update Time </th>
+                    <th scope="col" class="col-xs-2"> Update Time </th>
                     <th scope="col" class="col-xs-2"> Poster </th>
                 </tr>
                 </thead>
