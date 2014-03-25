@@ -135,7 +135,7 @@
                     <tr>
                         <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><a href="../post/${post.post_id}"> ${post.post_id} </a></td>
                         <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><a href="../post/${post.post_id}"> ${post.post_title} </a></td>
-                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><fmt:formatDate value="${post.last_modified_time}" pattern="yyyy-MM-ss HH:mm:ss" /></td>
+                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><fmt:formatDate value="${post.last_modified_time}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all"><a href="../../user/${post.user.user_id}"> ${post.user.user_name} </a></td>
                     </tr>
                 </c:forEach>

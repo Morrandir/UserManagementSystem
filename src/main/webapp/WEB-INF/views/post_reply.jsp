@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Qubo_Song
-  Date: 3/24/14
-  Time: 5:13 PM
+  Date: 3/25/14
+  Time: 3:02 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -12,15 +12,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>New Post</title>
+    <title>Reply</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="../../resources/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../resources/css/theme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/theme.css" rel="stylesheet">
 
 </head>
 <body>
@@ -76,31 +76,17 @@
 </div>
 
 <div class="container">
-    <form:form action="${pageContext.request.contextPath}/bbs/new" method="post" cssStyle="margin-top:50px" modelAttribute="newPostForm">
+    <form:form action="${pageContext.request.contextPath}/bbs/post/reply/${newReplyForm.post.post_id}" method="post" cssStyle="margin-top:50px" modelAttribute="newReplyForm">
         <div class="form-group">
-            <form:errors path="post_title" >
+            <form:errors path="reply_content" >
             <div class="has-error">
             </form:errors>
-            <label class="control-label" for="post_title"> Post Title </label>
-                <form:errors path="post_title" >
-                    <span class="control-label"> cannot be empty. </span>
+                <label class="control-label" for="reply_content"> Your reply: </label>
+                <form:errors path="reply_content" >
+                    <span class="control-label"> must be 1~250 characters. </span>
                 </form:errors>
-            <form:input type="text" path="post_title" cssClass="form-control" id="post_title" placeholder="Enter title of the new post" />
-            <form:errors path="post_title" >
-            </div>
-            </form:errors>
-            <br>
-        </div>
-        <div class="form-group">
-            <form:errors path="post_content" >
-            <div class="has-error">
-            </form:errors>
-            <label class="control-label" for="post_content"> Content </label>
-                <form:errors path="post_content" >
-                    <span class="control-label"> cannot be more than 500 characters. </span>
-                </form:errors>
-            <form:textarea cssClass="form-control" rows="10" path="post_content" id="post_content" placeholder="No more than 500 characters." />
-            <form:errors path="post_content" >
+                <form:textarea cssClass="form-control" rows="10" path="reply_content" id="reply_content" placeholder="No more than 250 characters." />
+            <form:errors path="reply_content" >
             </div>
             </form:errors>
         </div>

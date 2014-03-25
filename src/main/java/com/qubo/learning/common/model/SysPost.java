@@ -1,5 +1,9 @@
 package com.qubo.learning.common.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 /**
@@ -21,6 +25,9 @@ public class SysPost {
         this.post_id = post_id;
     }
 
+    @NotNull
+    @NotBlank(message = "Post title cannot be blank.")
+    @Size(max = 50, message = "Post title cannot be longer than 50 characters.")
     public String getPost_title() {
         return post_title;
     }
@@ -29,6 +36,7 @@ public class SysPost {
         this.post_title = post_title;
     }
 
+    @Size(max = 500, message = "Post content cannot be longer than 500 characters.")
     public String getPost_content() {
         return post_content;
     }

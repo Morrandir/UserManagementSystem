@@ -1,13 +1,21 @@
 package com.qubo.learning.rest.controller;
 
 import com.qubo.learning.common.model.SysPost;
+import com.qubo.learning.common.model.SysReply;
+import com.qubo.learning.common.model.SysUser;
 import com.qubo.learning.common.service.PostDao;
 import com.qubo.learning.common.service.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +37,7 @@ public class BBSController {
 
     @Autowired
     private PostDao postDao;
+
 
     @ModelAttribute("numOnline")
     int getOnlineUserCount() {
@@ -67,6 +76,8 @@ public class BBSController {
     @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
     public String getPost(@PathVariable int postId, Model model) {
 
+        int currentPage = (int) Math.ceil((double) postId / MAX_POSTS_PER_PAGE);
+
         SysPost post = postDao.getPostById(postId);
 
         if(post == null) {
@@ -74,7 +85,9 @@ public class BBSController {
             return "redirect:../page/1";
         }
 
+        model.addAttribute("currentPage", currentPage);
         model.addAttribute("post", post);
+        model.addAttribute("replies", postDao.getAllRepliesByPostId(postId));
         return "post";
     }
 
@@ -86,8 +99,61 @@ public class BBSController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String postNewPostForm(Model model) {
-        return "bbs";
+    public String postNewPostForm(@ModelAttribute("newPostForm") @Valid SysPost newPostForm, BindingResult result, Model model) {
+
+        int postsCount;
+        int totalPage;
+        Timestamp timeStamp;
+        User user;
+
+        if(result.hasErrors()) {
+            return "post_new";
+        }
+
+        timeStamp = new Timestamp(new Date().getTime());
+
+        user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        postDao.newPost(newPostForm.getPost_title(), newPostForm.getPost_content(), userDao.getUserByName(user.getUsername()).getUser_id(), timeStamp);
+
+        postsCount = postDao.getTotalPostsCount();
+        totalPage = (int) Math.ceil((double) postsCount / MAX_POSTS_PER_PAGE);
+
+        model.asMap().remove("numOnline");
+        return "redirect:page/" + totalPage;
     }
 
+    @RequestMapping(value = "/post/reply/{postId}", method = RequestMethod.GET)
+    public String getReplyForm(@PathVariable int postId, Model model) {
+
+        SysPost post = postDao.getPostById(postId);
+        if(post == null) {
+            model.asMap().clear();
+            return "redirect:../../page/1";
+        }
+
+        SysReply newReplyForm = new SysReply();
+        newReplyForm.setPost(post);
+        model.addAttribute("newReplyForm", newReplyForm);
+        return "post_reply";
+    }
+
+    @RequestMapping(value = "/post/reply/{postId}", method = RequestMethod.POST)
+    public String postReplyForm(@ModelAttribute("newReplyForm") @Valid SysReply newReplyForm, BindingResult result, @PathVariable int postId, Model model) {
+
+        Timestamp timeStamp;
+        User user;
+
+        if(result.hasErrors()) {
+            return "post_reply";
+        }
+
+        timeStamp = new Timestamp(new Date().getTime());
+        user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        postDao.newReply(postId, newReplyForm.getReply_content(), userDao.getUserByName(user.getUsername()).getUser_id(), timeStamp);
+
+        model.asMap().remove("numOnline");
+        return "redirect:../" + postId;
+    }
 }

@@ -4,6 +4,7 @@ import com.qubo.learning.common.model.SysPost;
 import com.qubo.learning.common.model.SysUser;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -28,5 +29,12 @@ public interface SysPostMapper {
                     one = @One(select = "com.qubo.learning.common.mapper.SysUserMapper.getUserById"))
     )
     public SysPost getPostById(@Param("post_id") int postId);
+
+    @Insert("insert into sys_post values(default, #{post_title}, #{post_content}, #{user_id}, #{post_time}, #{last_modified_time})")
+    public void newPost(@Param("post_title") String postTitle,
+                        @Param("post_content") String postContent,
+                        @Param("user_id") int userId,
+                        @Param("post_time") Timestamp postTime,
+                        @Param("last_modified_time") Timestamp lastModifiedTime);
 
 }

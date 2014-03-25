@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../../resources/css/theme.css" rel="stylesheet">
+    <link href="../../resources/css/docs.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -92,18 +93,32 @@
         </div>
         <div>
             <span><br></span>
-            <span> [ Post title: </span>
-            <span> ${post.post_title} </span>
-            <span> ] </span>
+            <span> [ Post title: ]<br> </span>
+            <span style="display:block;word-wrap:break-word"> ${post.post_title} </span>
         </div>
-        <div><br>${post.post_content}</div>
+        <div>
+            <br>
+            <span> [ Post content: ]<br> </span>
+            ${post.post_content}
+        </div>
 
         <div class="btn-group-xs">
             <br>
             <a href="${pageContext.request.contextPath}/bbs/post/reply/${post.post_id}" class="btn btn-primary"> Reply </a>
-            <a href="javascript:javascript:history.go(-1)" class="btn btn-primary"> Back </a>
+            <a href="${pageContext.request.contextPath}/bbs/page/${currentPage}" class="btn btn-primary"> Back </a>
         </div>
     </div>
+
+    <c:forEach var="reply" items="${replies}">
+        <div class="bs-callout bs-callout-info">
+            <div>
+                <span> Replied by: </span>
+                <span> ${reply.user.user_name} </span>
+            </div>
+            <span> ${reply.reply_content} </span>
+        </div>
+    </c:forEach>
+
 
 </div>
 
