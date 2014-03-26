@@ -15,9 +15,6 @@ public interface SysUserRoleMapper {
     @Select("select * from sys_user_role where user_id=#{userId}")
     public List<SysUserRole> getUserRolesByUserID(@Param("userId")int userId);
 
-    @Select("select max(role_id) from sys_user_role")
-    public int getMaxRoleId();
-
     @Insert("insert into sys_user_role values(default, #{userId}, #{roleName})")
     public void addRole(@Param("userId")int userId, @Param("roleName")String roleName);
 }
